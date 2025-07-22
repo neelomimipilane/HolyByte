@@ -3,175 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HolyByte - Powered by Grace</title>
+  <title>Serene Study | Powered by Faith</title>
   <script src="script.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    body {
-      background-color: #f5f5f5;
-      color: #222;
-      transition: background-color 0.3s, color 0.3s;
-    }
+body {
+  background-color: #fdfcfa;
+  color: #2e2e2e;
+  transition: background-color 0.3s, color 0.3s;
+}
 
-    .container {
-      display: flex;
-      min-height: 100vh;
-    }
+.container {
+  display: flex;
+  min-height: 100vh;
+}
 
-    /* Sidebar */
-    .sidebar {
-      background-color: #3a2e6e;
-      color: #fff;
-      width: 220px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+/* Sidebar */
+.sidebar {
+  background-color: #b9aedc;
+  color: #fff;
+  width: 220px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
 
-    .sidebar nav ul {
-      list-style: none;
-    }
+.sidebar nav ul {
+  list-style: none;
+}
 
-    .sidebar nav ul li {
-      margin-bottom: 1.2rem;
-    }
+.sidebar nav ul li {
+  margin-bottom: 1.2rem;
+}
 
-    .sidebar nav ul li a {
-      color: #d1c4e9;
-      text-decoration: none;
-      font-weight: 600;
-      display: block;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-    }
+.sidebar nav ul li a {
+  color: #f7f5ff;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
 
-    .sidebar nav ul li a.active,
-    .sidebar nav ul li a:hover {
-      background-color: #6659a8;
-      color: white;
-    }
+.sidebar nav ul li a.active,
+.sidebar nav ul li a:hover {
+  background-color: #a493c2;
+  color: white;
+}
 
-    #theme-toggle {
-      background-color: #6659a8;
-      border: none;
-      padding: 10px;
-      color: white;
-      font-weight: 600;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 2rem;
-    }
+#theme-toggle {
+  background-color: #a493c2;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2rem;
+}
 
-    /* Main Content */
-    .main-content {
-      flex-grow: 1;
-      padding: 30px 40px;
-    }
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 30px 40px;
+}
 
-    header h1, h2 {
-      font-size: 2.4rem;
-      margin-bottom: 0.2rem;
-      color: #3a2e6e;
-    }
+header h1, h2 {
+  font-size: 2.4rem;
+  margin-bottom: 0.2rem;
+  color: #7c6ca9;
+}
 
-    header p {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 2rem;
-    }
+header p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
 
-    .daily-verse {
-      background-color: #e0d7f3;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 8px rgba(58, 46, 110, 0.3);
-    }
+.daily-verse {
+  background-color: #ece9f6;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 8px rgba(185, 174, 220, 0.2);
+}
 
-    .daily-verse h2 {
-      margin-bottom: 0.8rem;
-      color: #3a2e6e;
-    }
+.daily-verse h2 {
+  margin-bottom: 0.8rem;
+  color: #7c6ca9;
+}
 
-    .daily-verse blockquote {
-      font-style: italic;
-      font-size: 1.1rem;
-      color: #4b3f8b;
-    }
+.daily-verse blockquote {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #5a4e80;
+}
 
-    /* Welcome text */
-    .welcome-text p {
-      font-size: 1.2rem;
-      color: #444;
-    }
+/* Welcome text */
+.welcome-text p {
+  font-size: 1.2rem;
+  color: #444;
+}
 
-    /* Dark Mode */
-    body.dark-mode {
-      background-color: #121212;
-      color: #ddd;
-    }
+/* Dark Mode (Optional Later) */
+body.dark-mode {
+  background-color: #1a1824;
+  color: #ddd;
+}
 
-    body.dark-mode .sidebar {
-      background-color: #1f1a44;
-    }
+body.dark-mode .sidebar {
+  background-color: #2e274c;
+}
 
-    body.dark-mode .sidebar nav ul li a {
-      color: #b9b4d3;
-    }
+body.dark-mode .sidebar nav ul li a {
+  color: #c6c1e5;
+}
 
-    body.dark-mode .sidebar nav ul li a.active,
-    body.dark-mode .sidebar nav ul li a:hover {
-      background-color: #3a3270;
-      color: #fff;
-    }
+body.dark-mode .sidebar nav ul li a.active,
+body.dark-mode .sidebar nav ul li a:hover {
+  background-color: #4a4075;
+  color: #fff;
+}
 
-    body.dark-mode #theme-toggle {
-      background-color: #3a3270;
-    }
+body.dark-mode #theme-toggle {
+  background-color: #4a4075;
+}
 
-    body.dark-mode header h1,
-    body.dark-mode .daily-verse h2 {
-      color: #a9a2d6;
-    }
+body.dark-mode header h1,
+body.dark-mode .daily-verse h2 {
+  color: #dcd6f7;
+}
 
-    body.dark-mode .daily-verse {
-      background-color: #2a244e;
-      box-shadow: none;
-    }
+body.dark-mode .daily-verse {
+  background-color: #302850;
+  box-shadow: none;
+}
 
-    body.dark-mode .daily-verse blockquote {
-      color: #ccc;
-    }
+body.dark-mode .daily-verse blockquote {
+  color: #c1b9e4;
+}
 
-    body.dark-mode .welcome-text p {
-      color: #bbb;
-    }
-
-    body.dark-mode .intro {
-      background-color: #3a3573;
-      color: #cfcff5;
-    }
+body.dark-mode .welcome-text p {
+  color: #bbb;
+}
   </style>
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
-      <h2 class="logo">HolyByte</h2>
+      <h2 class="logo">Serene Study</h2>
       <nav>
         <ul>
           <li><a href="#" class="active">Dashboard</a></li>
@@ -188,12 +183,12 @@
     </aside>
     <main class="main-content">
       <header>
-        <h1>Welcome to HolyByte</h1>
+        <h1>Welcome to Serene Study</h1>
         <p>Powered by Grace. Built for Growth.</p>
       
-        <h2>About HolyByte</h2>
+        <h2>About Serene Study</h2>
         <p>
-          HolyByte is your all-in-one faith-driven study companion — designed to help you manage your academics, grow spiritually, and stay motivated. Track your marks, organize notes, set study schedules, and get daily inspiration all in one place.
+          Serene Study is your all-in-one faith-driven study companion — designed to help you manage your academics, grow spiritually, and stay motivated. Track your marks, organize notes, set study schedules, and get daily inspiration all in one place.
         </p>
       </header>
 
@@ -205,7 +200,7 @@
       </section>
 
       <section class="welcome-text">
-        <p>Organize your studies, track your progress, and stay inspired daily with HolyByte...</p>
+        <p>Organize your studies, track your progress, and stay inspired daily with Serene Study...</p>
       </section>
     </main>
   </div>
