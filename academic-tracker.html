@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academic Tracker | HolyByte</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #f9f7ff;
+      color: #333;
+      padding: 20px;
+    }
+
+    a.back-btn {
+      text-decoration: none;
+      background-color: #6659a8;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #3a2e6e;
+      margin-bottom: 10px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-button {
+      background: #ece6fa;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #3a2e6e;
+      transition: 0.3s;
+    }
+
+    .tab-button.active {
+      background: #3a2e6e;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      background: #f2f0fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    input, select, button, textarea {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #3a2e6e;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .highlight {
+      background-color: #e0d7f8;
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-btn">← Back to Home</a>
+  <h1>Academic Tracker</h1>
+
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <button class="tab-button active" onclick="showTab('study')">📆 Study</button>
+    <button class="tab-button" onclick="showTab('lessons')">📚 Lessons</button>
+    <button class="tab-button" onclick="showTab('exam')">📝 Exam Marks</button>
+    <button class="tab-button" onclick="showTab('target')">🎯 Targets</button>
+    <button class="tab-button" onclick="showTab('tracker')">📊 Tracker</button>
+    <button class="tab-button" onclick="showTab('assignment')">📌 Assignments</button>
+    <button class="tab-button" onclick="showTab('countdown')">⏳ Countdown</button>
+    <button class="tab-button" onclick="showTab('focus')">🚨 Focus</button>
+    <button class="tab-button" onclick="showTab('motivation')">🌟 Motivation</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div id="study" class="tab-content active">
+    <h2>Study Timetable</h2>
+    <input type="text" id="study-day" placeholder="e.g. Monday" />
+    <input type="text" id="study-time" placeholder="e.g. 6pm - 8pm" />
+    <input type="text" id="study-subject" placeholder="Subject" />
+    <button onclick="addStudyTimetable()">Add</button>
+    <ul id="study-list"></ul>
+  </div>
+
+  <div id="lessons" class="tab-content">
+    <h2>Lesson Timetable</h2>
+    <input type="text" id="lesson-day" placeholder="Day" />
+    <input type="text" id="lesson-time" placeholder="Time" />
+    <input type="text" id="lesson-subject" placeholder="Subject" />
+    <button onclick="addLesson()">Add</button>
+    <ul id="lesson-list"></ul>
+  </div>
+
+  <div id="exam" class="tab-content">
+    <h2>Exam Marks</h2>
+    <input type="text" id="exam-subject" placeholder="Subject" />
+    <input type="number" id="exam-score" placeholder="Score" />
+    <button onclick="addExamMark()">Add</button>
+    <ul id="exam-marks-list"></ul>
+  </div>
+
+  <div id="target" class="tab-content">
+    <h2>Target Marks</h2>
+    <input type="text" id="target-subject" placeholder="Subject" />
+    <input type="number" id="target-score" placeholder="Target Score" />
+    <button onclick="addTargetMark()">Add</button>
+    <ul id="target-marks-list"></ul>
+  </div>
+
+  <div id="tracker" class="tab-content">
+    <h2>Performance Tracker</h2>
+    <div id="performance-result">Enter your exam and target marks to compare.</div>
+  </div>
+
+  <div id="assignment" class="tab-content">
+    <h2>Assignment Tracker</h2>
+    <input type="text" id="assignment-title" placeholder="Title" />
+    <input type="date" id="assignment-due" />
+    <textarea id="assignment-notes" placeholder="Notes..."></textarea>
+    <button onclick="addAssignment()">Add</button>
+    <ul id="assignment-list"></ul>
+  </div>
+
+  <div id="countdown" class="tab-content">
+    <h2>Exam Countdown</h2>
+    <input type="date" id="exam-date" />
+    <button onclick="countdown()">Calculate</button>
+    <div id="countdown-result" class="highlight"></div>
+  </div>
+
+  <div id="focus" class="tab-content">
+    <h2>Priority Focus Subjects</h2>
+    <input type="text" id="focus-subject" placeholder="Subject needing attention" />
+    <button onclick="addFocus()">Add</button>
+    <ul id="focus-list"></ul>
+  </div>
+
+  <div id="motivation" class="tab-content">
+    <h2>Motivational Quote</h2>
+    <div id="motivation-text" class="highlight"></div>
+  </div>
+
+  <!-- JS Logic -->
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function showTab(tabId) {
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    const examMarks = {};
+    const targetMarks = {};
+
+    function addStudyTimetable() {
+      const day = document.getElementById('study-day').value;
+      const time = document.getElementById('study-time').value;
+      const subject = document.getElementById('study-subject').value;
+      const li = document.createElement('li');
+      li.textContent = `${day}, ${time} - ${subject}`;
+      document.getElementById('study-list').appendChild(li);
+    }
+
+    function addLesson() {
+      const day = document.getElementById('lesson-day').value;
+      const time = document.getElementById('lesson-time').value;
+      const subject = document.getElementById('lesson-subject').value;
+      const li = document.createElement('li');
+      li.textContent = `${day}, ${time} - ${subject}`;
+      document.getElementById('lesson-list').appendChild(li);
+    }
+
+    function addExamMark() {
+      const subject = document.getElementById('exam-subject').value;
+      const score = parseFloat(document.getElementById('exam-score').value);
+      examMarks[subject] = score;
+      const li = document.createElement('li');
+      li.textContent = `${subject}: ${score}`;
+      document.getElementById('exam-marks-list').appendChild(li);
+      comparePerformance();
+    }
+
+    function addTargetMark() {
+      const subject = document.getElementById('target-subject').value;
+      const score = parseFloat(document.getElementById('target-score').value);
+      targetMarks[subject] = score;
+      const li = document.createElement('li');
+      li.textContent = `${subject}: ${score}`;
+      document.getElementById('target-marks-list').appendChild(li);
+      comparePerformance();
+    }
+
+    function comparePerformance() {
+      const result = document.getElementById('performance-result');
+      let output = '';
+      for (let subject in examMarks) {
+        const actual = examMarks[subject];
+        const target = targetMarks[subject] || 0;
+        output += `<p>${subject}: Scored ${actual} / Target ${target} → ${actual >= target ? '✅ Great!' : '⚠️ Try harder'}</p>`;
+      }
+      result.innerHTML = output || 'Add exam and target marks first.';
+    }
+
+    function addAssignment() {
+      const title = document.getElementById('assignment-title').value;
+      const due = document.getElementById('assignment-due').value;
+      const notes = document.getElementById('assignment-notes').value;
+      const li = document.createElement('li');
+      li.textContent = `${title} - Due: ${due} - ${notes}`;
+      document.getElementById('assignment-list').appendChild(li);
+    }
+
+    function countdown() {
+      const date = new Date(document.getElementById('exam-date').value);
+      const now = new Date();
+      const diff = Math.ceil((date - now) / (1000 * 60 * 60 * 24));
+      document.getElementById('countdown-result').textContent =
+        diff > 0 ? `${diff} day(s) left until your exam.` : 'Exam date has passed.';
+    }
+
+    function addFocus() {
+      const subject = document.getElementById('focus-subject').value;
+      const li = document.createElement('li');
+      li.textContent = subject;
+      document.getElementById('focus-list').appendChild(li);
+    }
+
+    function showMotivation() {
+      const quotes = [
+        "You can do all things through Christ – Philippians 4:13",
+        "Don’t grow weary in doing good – Galatians 6:9",
+        "Study to show yourself approved – 2 Timothy 2:15",
+        "Your effort today creates success tomorrow.",
+        "God is within her, she will not fall – Psalm 46:5"
+      ];
+      document.getElementById('motivation-text').textContent =
+        quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    showMotivation();
+  </script>
+</body>
+</html>
