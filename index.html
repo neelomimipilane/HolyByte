@@ -188,7 +188,7 @@ body.dark-mode .welcome-text p {
       
         <h2>About Serene Study</h2>
         <p>
-          Serene Study is your all-in-one faith-driven study companion — designed to help you manage your academics, grow spiritually, and stay motivated. Track your marks, organize notes, set study schedules, and get daily inspiration all in one place.
+          Serene Study is your all-in-one faith-driven study companion — designed to help you manage your academics, grow spiritually, and stay motivated. Track your marks, organize notes, and get daily inspiration all in one place.
         </p>
       </header>
 
@@ -200,9 +200,64 @@ body.dark-mode .welcome-text p {
       </section>
 
       <section class="welcome-text">
-        <p>Organize your studies, track your progress, and stay inspired daily with Serene Study...</p>
+        <p>Organize your studies, track your progress, and stay inspired daily with Serene Study...
+           Also try our new friendly AI assistant Bitsy when you need help</p>
       </section>
     </main>
+
+  <!-- Bitsy Chat Widget -->
+<div id="bitsy-widget" style="position: fixed; bottom: 20px; right: 20px; width: 320px; max-height: 400px; background: #b9aedc; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.3); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <div id="bitsy-header" style="padding: 10px; background: #a493c2; border-radius: 10px 10px 0 0; color: white; font-weight: 700;">
+    Bitsy Assistant
+  </div>
+  <div id="bitsy-chat" style="padding: 10px; height: 280px; overflow-y: auto; background: #ece9f6; color: #3d3a4f; font-size: 0.9rem;">
+    <div><em>Bitsy is here to help! Ask me anything.</em></div>
+  </div>
+  <input id="bitsy-input" type="text" placeholder="Type a message..." style="width: 100%; padding: 8px; border: none; border-radius: 0 0 10px 10px; font-size: 1rem; box-sizing: border-box;" />
+</div>
+
+<script>
+  const chat = document.getElementById('bitsy-chat');
+  const input = document.getElementById('bitsy-input');
+
+  function addMessage(sender, text) {
+    const msg = document.createElement('div');
+    msg.style.marginBottom = '8px';
+    msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function getResponse(message) {
+    message = message.toLowerCase();
+
+    if (message.includes('hello') || message.includes('hi')) {
+      return "Hello! I'm Bitsy, your study and faith assistant. How can I help you today?";
+    }
+    if (message.includes('verse')) {
+      return "Here's a verse for you: Philippians 4:13 - 'I can do all things through Christ who strengthens me.'";
+    }
+    if (message.includes('study tip')) {
+      return "Try breaking your study into 25-minute Pomodoro sessions with 5-minute breaks. Stay focused and take care of yourself!";
+    }
+    if (message.includes('budget')) {
+      return "To manage your budget well, track your expenses daily and set realistic spending limits. Need help setting it up?";
+    }
+    if (message.includes('help')) {
+      return "I can assist with study tips, daily verses, budgeting advice, and more. Just ask!";
+    }
+    return "I'm still learning! Could you try asking in a different way?";
+  }
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && input.value.trim() !== '') {
+      addMessage('You', input.value.trim());
+      const reply = getResponse(input.value.trim());
+      setTimeout(() => addMessage('Bitsy', reply), 500);
+      input.value = '';
+    }
+  });
+</script>
   </div>
 </body>
 </html>
