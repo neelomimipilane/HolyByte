@@ -205,20 +205,132 @@ body.dark-mode .welcome-text p {
       </section>
     </main>
 
-  <!-- Bitsy Chat Widget -->
-<div id="bitsy-widget" style="position: fixed; bottom: 20px; right: 20px; width: 320px; max-height: 400px; background: #b9aedc; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.3); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <div id="bitsy-header" style="padding: 10px; background: #a493c2; border-radius: 10px 10px 0 0; color: white; font-weight: 700;">
+<!-- Bitsy Toggle Button -->
+<button id="bitsy-toggle" 
+  style="
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    background: #f8d7e0; /* light blush pink */
+    border: none; 
+    border-radius: 50%; 
+    width: 60px; 
+    height: 60px; 
+    box-shadow: 0 4px 10px rgba(181, 128, 177, 0.5);
+    cursor: pointer; 
+    font-weight: 700; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #6a4f7d; /* deep purple */
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  "
+  aria-label="Toggle Bitsy Assistant"
+>
+  B
+</button>
+
+<!-- Bitsy Chat Widget (hidden by default) -->
+<div id="bitsy-widget" 
+  style="
+    position: fixed; 
+    bottom: 90px; /* above the button */
+    right: 20px; 
+    width: 320px; 
+    max-height: 400px; 
+    background: #fef9f6; /* cream white */
+    border-radius: 10px; 
+    box-shadow: 0 0 15px rgba(106, 79, 125, 0.4);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+  "
+>
+  <div id="bitsy-header" 
+    style="
+      padding: 10px; 
+      background: #6a4f7d; /* deep purple */
+      border-radius: 10px 10px 0 0; 
+      color: #f8d7e0; /* light blush pink */
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
     Bitsy Assistant
+    <button id="bitsy-close" 
+      style="
+        background: transparent;
+        border: none;
+        color: #f8d7e0;
+        font-size: 22px;
+        cursor: pointer;
+        font-weight: 700;
+        line-height: 1;
+      "
+      aria-label="Close Bitsy Assistant"
+    >
+      ×
+    </button>
   </div>
-  <div id="bitsy-chat" style="padding: 10px; height: 280px; overflow-y: auto; background: #ece9f6; color: #3d3a4f; font-size: 0.9rem;">
+  <div id="bitsy-chat" 
+    style="
+      padding: 10px; 
+      height: 280px; 
+      overflow-y: auto; 
+      background: #f6eef5; /* pale purple-cream */
+      color: #4b3f8b; /* muted purple */
+      font-size: 0.9rem;
+      flex-grow: 1;
+    "
+  >
     <div><em>Bitsy is here to help! Ask me anything.</em></div>
   </div>
-  <input id="bitsy-input" type="text" placeholder="Type a message..." style="width: 100%; padding: 8px; border: none; border-radius: 0 0 10px 10px; font-size: 1rem; box-sizing: border-box;" />
+  <input id="bitsy-input" 
+    type="text" 
+    placeholder="Type a message..." 
+    style="
+      width: 100%; 
+      padding: 8px; 
+      border: none; 
+      border-radius: 0 0 10px 10px; 
+      font-size: 1rem; 
+      box-sizing: border-box;
+      outline: none;
+      color: #6a4f7d;
+      background: #f8d7e0;
+      font-weight: 600;
+    " 
+    aria-label="Bitsy chat input"
+  />
 </div>
 
 <script>
+  const toggleBtn = document.getElementById('bitsy-toggle');
+  const bitsyWidget = document.getElementById('bitsy-widget');
+  const closeBtn = document.getElementById('bitsy-close');
   const chat = document.getElementById('bitsy-chat');
   const input = document.getElementById('bitsy-input');
+
+  // Toggle chat widget visibility
+  toggleBtn.addEventListener('click', () => {
+    if (bitsyWidget.style.display === 'flex') {
+      bitsyWidget.style.display = 'none';
+    } else {
+      bitsyWidget.style.display = 'flex';
+      input.focus();
+    }
+  });
+
+  // Close button hides chat widget
+  closeBtn.addEventListener('click', () => {
+    bitsyWidget.style.display = 'none';
+  });
 
   function addMessage(sender, text) {
     const msg = document.createElement('div');
