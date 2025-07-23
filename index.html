@@ -161,6 +161,90 @@ body.dark-mode .daily-verse blockquote {
 body.dark-mode .welcome-text p {
   color: #bbb;
 }
+
+#bitsy-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #f8d7e0; /* light blush pink */
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 10px rgba(181, 128, 177, 0.5);
+    cursor: pointer;
+    font-weight: 700;
+    color: #6a4f7d; /* deep purple */
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  /* Chat widget container */
+  #bitsy-widget {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    max-height: 400px;
+    background: #fef9f6; /* cream white */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(106, 79, 125, 0.4);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+  }
+
+  /* Header */
+  #bitsy-header {
+    padding: 10px;
+    background: #6a4f7d; /* deep purple */
+    border-radius: 10px 10px 0 0;
+    color: #f8d7e0; /* light blush pink */
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Close button */
+  #bitsy-close {
+    background: transparent;
+    border: none;
+    color: #f8d7e0;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* Chat content */
+  #bitsy-chat {
+    padding: 10px;
+    height: 280px;
+    overflow-y: auto;
+    background: #f6eef5; /* pale purple-cream */
+    color: #4b3f8b; /* muted purple */
+    font-size: 0.9rem;
+    flex-grow: 1;
+  }
+
+  /* Input */
+  #bitsy-input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    color: #6a4f7d;
+    background: #f8d7e0;
+    font-weight: 600;
+  }
   </style>
 </head>
 <body>
@@ -204,110 +288,15 @@ body.dark-mode .welcome-text p {
            Also try our new friendly AI assistant Bitsy when you need help</p>
       </section>
     </main>
+    <button id="bitsy-toggle" aria-label="Toggle Bitsy Assistant">B</button>
 
-<!-- Bitsy Toggle Button -->
-<button id="bitsy-toggle" 
-  style="
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    background: #f8d7e0; /* light blush pink */
-    border: none; 
-    border-radius: 50%; 
-    width: 60px; 
-    height: 60px; 
-    box-shadow: 0 4px 10px rgba(181, 128, 177, 0.5);
-    cursor: pointer; 
-    font-weight: 700; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #6a4f7d; /* deep purple */
-    font-size: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  "
-  aria-label="Toggle Bitsy Assistant"
->
-  B
-</button>
-
-<!-- Bitsy Chat Widget (hidden by default) -->
-<div id="bitsy-widget" 
-  style="
-    position: fixed; 
-    bottom: 90px; /* above the button */
-    right: 20px; 
-    width: 320px; 
-    max-height: 400px; 
-    background: #fef9f6; /* cream white */
-    border-radius: 10px; 
-    box-shadow: 0 0 15px rgba(106, 79, 125, 0.4);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 999;
-  "
->
-  <div id="bitsy-header" 
-    style="
-      padding: 10px; 
-      background: #6a4f7d; /* deep purple */
-      border-radius: 10px 10px 0 0; 
-      color: #f8d7e0; /* light blush pink */
-      font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    "
-  >
+<div id="bitsy-widget" role="region" aria-live="polite" aria-label="Bitsy Chat Assistant">
+  <div id="bitsy-header">
     Bitsy Assistant
-    <button id="bitsy-close" 
-      style="
-        background: transparent;
-        border: none;
-        color: #f8d7e0;
-        font-size: 22px;
-        cursor: pointer;
-        font-weight: 700;
-        line-height: 1;
-      "
-      aria-label="Close Bitsy Assistant"
-    >
-      ×
-    </button>
+    <button id="bitsy-close" aria-label="Close Bitsy Assistant">&times;</button>
   </div>
-  <div id="bitsy-chat" 
-    style="
-      padding: 10px; 
-      height: 280px; 
-      overflow-y: auto; 
-      background: #f6eef5; /* pale purple-cream */
-      color: #4b3f8b; /* muted purple */
-      font-size: 0.9rem;
-      flex-grow: 1;
-    "
-  >
-    <div><em>Bitsy is here to help! Ask me anything.</em></div>
-  </div>
-  <input id="bitsy-input" 
-    type="text" 
-    placeholder="Type a message..." 
-    style="
-      width: 100%; 
-      padding: 8px; 
-      border: none; 
-      border-radius: 0 0 10px 10px; 
-      font-size: 1rem; 
-      box-sizing: border-box;
-      outline: none;
-      color: #6a4f7d;
-      background: #f8d7e0;
-      font-weight: 600;
-    " 
-    aria-label="Bitsy chat input"
-  />
+  <div id="bitsy-chat"><em>Bitsy is here to help! Ask me anything.</em></div>
+  <input id="bitsy-input" type="text" placeholder="Type a message..." aria-label="Bitsy chat input" />
 </div>
 
 <script>
@@ -317,7 +306,6 @@ body.dark-mode .welcome-text p {
   const chat = document.getElementById('bitsy-chat');
   const input = document.getElementById('bitsy-input');
 
-  // Toggle chat widget visibility
   toggleBtn.addEventListener('click', () => {
     if (bitsyWidget.style.display === 'flex') {
       bitsyWidget.style.display = 'none';
@@ -327,7 +315,6 @@ body.dark-mode .welcome-text p {
     }
   });
 
-  // Close button hides chat widget
   closeBtn.addEventListener('click', () => {
     bitsyWidget.style.display = 'none';
   });
@@ -370,6 +357,5 @@ body.dark-mode .welcome-text p {
     }
   });
 </script>
-  </div>
 </body>
 </html>
